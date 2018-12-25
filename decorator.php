@@ -1,7 +1,75 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pc
- * Date: 24/12/2018
- * Time: 下午5:29
- */
+
+header("Content-type:text/html;charset=utf-8");
+ini_set( 'display_errors', 'on');
+ini_set( 'error_reporting', '-1');
+ini_set( 'display_startup_errors', 'on');
+
+
+//装饰模式
+abstract class component
+{
+    abstract public function operation();
+}
+
+class concreteComponent extends component
+{
+    public function operation()
+    {
+        var_dump('具体对象的操作');
+    }
+}
+
+abstract class decorator extends component
+{
+    protected $component;
+
+    public function setComponent(component $component)
+    {
+        $this->component = $component;
+    }
+
+    public function operation()
+    {
+        $this->component->operation();
+    }
+}
+
+class concreteDecoratorA extends decorator
+{
+    private $addedState;
+
+    public function operation()
+    {
+        parent::operation();
+        $this->addedState = 'new state';
+        var_dump('具体装饰对象A的操作');
+    }
+}
+
+class concreteDecoratorB extends decorator
+{
+    private $addedState;
+
+    public function operation()
+    {
+        parent::operation();
+        $this->addedState = 'new state';
+        var_dump('具体装饰对象B的操作');
+    }
+
+    private function AddedBehavior()
+    {
+
+    }
+}
+
+$c = new concreteComponent();
+$d1 = new concreteDecoratorA();
+$d2 = new concreteDecoratorB();
+$d1->setComponent($c);
+$d2->setComponent($d1);
+$d2->operation();
+
+
+
