@@ -5,6 +5,12 @@ ini_set( 'display_errors', 'on');
 ini_set( 'error_reporting', '-1');
 ini_set( 'display_startup_errors', 'on');
 
+/**
+ * （装饰包装具体的事物，简化原有类）
+ * 我的理解:concreteComponent为具体的事物，然后在给他套上一层一层的装饰，
+ * 要什么装饰直接新增装饰类就好了，装饰相当于他的一些动态的添加一些功能，如果这些功能很少使用
+ * */
+
 
 //装饰模式
 abstract class component
